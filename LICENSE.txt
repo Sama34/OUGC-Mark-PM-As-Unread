@@ -1,0 +1,32 @@
+ *********							*********************
+ * uDezain Free Plugins End Users Licence Agreement	*
+ * Website: http://www.udezain.com.ar					*
+ *********************							*********
+
+
+You agree with this license if you:
+	a) Download this plugin and/or
+	b)- Install this plugin and/or
+	c)- Use this plugin.
+
+All uDezain PRODUCTS are protected by the laws of The United States of America and International Laws.
+
+0.- DEFINITIONS
+	a) PRODUCT(s): Any piece of software which is provided by uDezain to users.
+	b) YOU: Any person that downloads, install or uses uDezain's PRODUCTS.
+
+1.- GRANT OF LICENCE
+This end users licence agreement grants YOU the following rights:
+
+	a) Installation and Use: YOU may install uDezain PRODUCTS on any domain and server that YOU own.
+	b) Modification: YOU may modify, in whole or part, uDezain's PRODUCTS without uDezain's permission. 
+	c) Redistribution and reproduction: YOU may not reproduce and/or distribute, in whole or part, any copies of uDezain's PRODUCTS without previus written permission from uDezain.
+
+2. OTHER RIGHTS OR LIMITATIONS
+	a) Limitations on Modifying: Modifying uDezain PRODUCTS, in whole or part, does not give YOU any additional rights and therefore YOU are still under agreement with this EULA.
+
+	b) Separation of Components: uDezain PRODUCTS are licenced as a single PRODUCT. Its components may not be separated for use anywhere else.
+
+ *********							*********************
+ *			Last Modified: 20th of March, 2012.			*
+ *********************							*********
