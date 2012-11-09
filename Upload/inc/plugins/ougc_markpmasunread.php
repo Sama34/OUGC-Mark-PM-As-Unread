@@ -59,9 +59,9 @@ function ougc_markpmasunread_info()
 	return array(
 		'name'			=> 'OUGC Mark PM As Unread',
 		'description'	=> $lang->ougc_markpmasunread_d,
-		'website'		=> 'http://udezain.com.ar/',
+		'website'		=> 'http://mods.mybb.com/view/ougc-mark-pm-as-unread',
 		'author'		=> 'Omar Gonzalez',
-		'authorsite'	=> 'http://udezain.com.ar/',
+		'authorsite'	=> 'http://community.mybb.com/user-25096.html',
 		'version'		=> '1.1',
 		'guid' 			=> '0aa48a84852a5b46472bf3144f80fd34',
 		'compatibility' => '16*',
