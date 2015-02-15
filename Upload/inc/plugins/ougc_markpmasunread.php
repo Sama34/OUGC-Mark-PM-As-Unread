@@ -145,7 +145,7 @@ function ougc_markpmasunread_is_installed()
 // _install
 function ougc_markpmasunread_uninstall()
 {
-	global $PL;
+	global $PL, $cache;
 
 	// Delete settings
 	$PL->settings_delete('ougc_markpmasunread');
