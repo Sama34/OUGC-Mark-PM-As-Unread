@@ -31,21 +31,24 @@
 defined('IN_MYBB') or die('Direct initialization of this file is not allowed.');
 
 // Tell MyBB when to run the hook
-if(!defined('IN_ADMINCP'))
+if(defined('IN_ADMINCP'))
 {
-	if(defined('THIS_SCRIPT') && THIS_SCRIPT == 'private.php' && ougc_markpmasunread_is_installed())
+	$plugins->add_hook('admin_config_settings_start', 'ougc_markpmasunread_loadlang');
+	$plugins->add_hook('admin_style_templates_set', 'ougc_markpmasunread_loadlang');;
+	$plugins->add_hook('admin_config_settings_change', 'ougc_markpmasunread_settings_change');
+}
+elseif(THIS_SCRIPT == 'private.php')
+{
+	$plugins->add_hook('private_start', 'ougc_markpmasunread_do_mark');
+	$plugins->add_hook('private_end', 'ougc_markpmasunread_private');
+
+	global $templatelist;
+
+	if(isset($templatelist))
 	{
-		$plugins->add_hook('private_start', 'ougc_markpmasunread_do_mark');
-		$plugins->add_hook('private_end', 'ougc_markpmasunread_private');
-
-		global $templatelist;
-
-		if(isset($templatelist))
-		{
-			$templatelist .= ',';
-		}
-		$templatelist .= 'ougcmarkpmasunread';
+		$templatelist .= ',';
 	}
+	$templatelist .= 'ougcmarkpmasunread';
 }
 
 // PLUGINLIBRARY
@@ -57,50 +60,71 @@ function ougc_markpmasunread_info()
 	ougc_markpmasunread_loadlang();
 
 	return array(
-		'name'			=> 'OUGC Mark PM As Unread',
-		'description'	=> $lang->ougc_markpmasunread_d,
-		'website'		=> 'http://mods.mybb.com/view/ougc-mark-pm-as-unread',
-		'author'		=> 'Omar Gonzalez',
-		'authorsite'	=> 'http://community.mybb.com/user-25096.html',
-		'version'		=> '1.1',
-		'guid' 			=> '0aa48a84852a5b46472bf3144f80fd34',
-		'compatibility' => '16*',
-		'pluginlibraryversion' => 11,
-		'pluginlibraryurl' => 'http://mods.mybb.com/view/pluginlibrary'
+		'name'					=> 'OUGC Mark PM As Unread',
+		'description'			=> $lang->setting_group_ougc_markpmasunread,
+		'website'				=> 'http://omarg.me',
+		'author'				=> 'Omar G.',
+		'authorsite'			=> 'http://omarg.me',
+		'version'				=> '1.8',
+		'versioncode'			=> 1800,
+		'compatibility'			=> '18*',
+		'pluginlibraryversion'	=> 12,
+		'pluginlibraryurl'		=> 'http://mods.mybb.com/view/pluginlibrary'
 	);
 }
 
 // Activate our plugin
 function ougc_markpmasunread_activate()
 {
-	global $db, $lang, $PL;
+	global $db, $lang, $PL, $cache;
+	ougc_markpmasunread_plreq();
 	ougc_markpmasunread_deactivate();
 	ougc_markpmasunread_loadlang();
 	$PL or require_once PLUGINLIBRARY;
 
-	$PL->settings('ougc_markpmasunread', $lang->ougc_markpmasunread, $lang->ougc_markpmasunread_d, array(
+	$PL->settings('ougc_markpmasunread', $lang->setting_group_ougc_markpmasunread, $lang->setting_group_ougc_markpmasunread_desc, array(
 		'groups'			=> array(
-		   'title'			=> $lang->ougc_markpmasunread_s_groups,
-		   'description'	=> $lang->ougc_markpmasunread_s_groups_d,
-		   'optionscode'	=> 'text',
-		   'value'			=> ''
+		   'title'			=> $lang->setting_ougc_markpmasunread_groups,
+		   'description'	=> $lang->setting_ougc_markpmasunread_groups_desc,
+		   'optionscode'	=> 'groupselect',
+		   'value'			=> -1
 		),
 	));
 
 	$db->delete_query('templates', 'title=\'ougc_markpmasunread\' AND sid=\'-1\'');
 
-	$PL->templates('ougcmarkpmasunread', $lang->ougc_markpmasunread, array(
+	$PL->templates('ougcmarkpmasunread', '<lang:setting_group_ougc_markpmasunread>', array(
 		''	=> '<span class="smalltext">[<a href="{$mybb->settings[\'bburl\']}/private.php?markunread={$pmid}&amp;my_post_code={$mybb->post_code}">{$lang->ougc_markpmasunread_var}</a>]</span>',
 	));
 
 	require_once MYBB_ROOT.'inc/adminfunctions_templates.php';
 	find_replace_templatesets('private_messagebit', '#'.preg_quote('{$denyreceipt}').'#i', '{$denyreceipt}<!--MARKUNREAD[{$message[\'pmid\']}]-->');
+
+	// Insert/update version into cache
+	$plugins = $cache->read('ougc_plugins');
+	if(!$plugins)
+	{
+		$plugins = array();
+	}
+
+	$info = ougc_markpmasunread_info();
+
+	if(!isset($plugins['markpmasunread']))
+	{
+		$plugins['markpmasunread'] = $info['versioncode'];
+	}
+
+	/*~*~* RUN UPDATES START *~*~*/
+
+	/*~*~* RUN UPDATES END *~*~*/
+
+	$plugins['markpmasunread'] = $info['versioncode'];
+	$cache->update('ougc_plugins', $plugins);
 }
 
 // Deactivate our plugin
 function ougc_markpmasunread_deactivate()
 {
-	ougc_markpmasunread_plreq();
 	require_once MYBB_ROOT.'inc/adminfunctions_templates.php';
 	find_replace_templatesets('private_messagebit', '#'.preg_quote('<!--MARKUNREAD[{$message[\'pmid\']}]-->').'#i', '', 0);
 }
@@ -108,7 +132,6 @@ function ougc_markpmasunread_deactivate()
 // uninstall
 function ougc_markpmasunread_install()
 {
-	ougc_markpmasunread_plreq();
 }
 
 // _is_installed
@@ -122,8 +145,6 @@ function ougc_markpmasunread_is_installed()
 // _install
 function ougc_markpmasunread_uninstall()
 {
-	ougc_markpmasunread_plreq();
-
 	global $PL;
 
 	// Delete settings
@@ -131,8 +152,37 @@ function ougc_markpmasunread_uninstall()
 
 	// Delete templates
 	$PL->templates_delete('ougcmarkpmasunread');
+
+	// Delete version from cache
+	$plugins = (array)$cache->read('ougc_plugins');
+
+	if(isset($plugins['markpmasunread']))
+	{
+		unset($plugins['markpmasunread']);
+	}
+
+	if(!empty($plugins))
+	{
+		$cache->update('ougc_plugins', $plugins);
+	}
+	else
+	{
+		$PL->cache_delete('ougc_plugins');
+	}
 }
 
+// Language support for settings
+function ougc_markpmasunread_settings_change()
+{
+	global $db, $mybb;
+
+	$query = $db->simple_select('settinggroups', 'name', 'gid=\''.(int)$mybb->input['gid'].'\'');
+	$groupname = $db->fetch_field($query, 'name');
+	if($groupname == 'ougc_markpmasunread')
+	{
+		ougc_markpmasunread_loadlang();
+	}
+}
 // Mark a PM as unread
 function ougc_markpmasunread_do_mark()
 {
@@ -140,15 +190,9 @@ function ougc_markpmasunread_do_mark()
 
 	if(isset($mybb->input['markunread']))
 	{
-		if($mybb->settings['ougc_markpmasunread_groups'] !== '')
+		if(!($mybb->settings['ougc_markpmasunread_groups'] == -1 || is_member($mybb->settings['ougc_markpmasunread_groups'])))
 		{
-			global $PL;
-			$PL or require_once PLUGINLIBRARY;
-
-			if(!(bool)$PL->is_member($mybb->settings['ougc_markpmasunread_groups']))
-			{
-				error_no_permission();
-			}
+			error_no_permission();
 		}
 
 		verify_post_check($mybb->input['my_post_code']);
@@ -158,8 +202,8 @@ function ougc_markpmasunread_do_mark()
 			global $lang;
 			ougc_markpmasunread_loadlang();
 
-			isset($lang->$mark) or $lang->$mark = $lang->ougc_markpmasunread_error_unkown;
-			error($lang->$mark);
+			isset($lang->{$mark}) or $lang->{$mark} = $lang->ougc_markpmasunread_error_unkown;
+			error($lang->{$mark});
 		}
 
 		$mybb->settings['redirects'] = $mybb->user['showredirect'] = 0;
@@ -172,15 +216,9 @@ function ougc_markpmasunread_private()
 {
 	global $settings;
 
-	if($settings['ougc_markpmasunread_groups'] !== '')
+	if(!($settings['ougc_markpmasunread_groups'] == -1 || is_member($settings['ougc_markpmasunread_groups'])))
 	{
-		global $PL;
-		$PL or require_once PLUGINLIBRARY;
-
-		if(!(bool)$PL->is_member($settings['ougc_markpmasunread_groups']))
-		{
-			return;
-		}
+		return;
 	}
 
 	global $messagelist;
@@ -262,20 +300,7 @@ function ougc_markpmasunread_loadlang()
 {
 	global $lang;
 
-	if(!isset($lang->ougc_markpmasunread))
-	{
-		if(defined('IN_ADMINCP'))
-		{
-			$bul = $lang->language;
-			$lang->language = str_replace('/admin', '', $lang->language);
-			$lang->load('ougc_markpmasunread');
-			$lang->language = $bul;
-		}
-		else
-		{
-			$lang->load('ougc_markpmasunread');
-		}
-	}
+	isset($lang->setting_group_ougc_markpmasunread) or $lang->load('ougc_markpmasunread');
 }
 
 // PL requirement check

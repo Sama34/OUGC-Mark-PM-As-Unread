@@ -2,7 +2,7 @@
 
 /***************************************************************************
  *
- *   OUGC Mark PM As Unread plugin (/inc/languages/english/ougc_markpmasunread.php)
+ *   OUGC Mark PM As Unread plugin (/inc/languages/english/admin/ougc_markpmasunread.php)
  *	 Author: Omar Gonzalez
  *   Copyright: © 2012 Omar Gonzalez
  *   
@@ -29,10 +29,12 @@
 
 // Plugin API
 $l['setting_group_ougc_markpmasunread'] = 'OUGC Mark PM As Unread';
+$l['setting_group_ougc_markpmasunread_desc'] = 'Allow users to mark private messages as unread.';
 
-// UCP
-$l['ougc_markpmasunread_var'] = 'Mark Unread';
-$l['ougc_markpmasunread_error_invalidpm'] = 'The private message doesn\'t exists.';
-$l['ougc_markpmasunread_error_alreadyunread'] = 'The private message is already marked as unread.';
-$l['ougc_markpmasunread_error_unkown'] = 'A unkown error was found.';
-$l['ougc_markpmasunread_error_userupdate'] = 'It was not possible to update your PM Count.';
+// Settings
+$l['setting_ougc_markpmasunread_groups'] = 'Allowed Groups';
+$l['setting_ougc_markpmasunread_groups_desc'] = 'Select the allowed groups to use this feature.';
+
+// PluginLibrary
+$l['ougc_markpmasunread_plreq'] = 'This plugin requires <a href="{1}">PluginLibrary</a> version {2} or later to be uploaded to your forum.';
+$l['ougc_markpmasunread_plold'] = 'This plugin requires PluginLibrary version {2} or later, whereas your current version is {1}. Please do update <a href="{3}">PluginLibrary</a>.';
