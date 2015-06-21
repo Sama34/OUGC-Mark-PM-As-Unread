@@ -68,6 +68,7 @@ function ougc_markpmasunread_info()
 		'version'				=> '1.8',
 		'versioncode'			=> 1800,
 		'compatibility'			=> '18*',
+		'codename'				=> 'ougc_markpmasunread',
 		'pluginlibraryversion'	=> 12,
 		'pluginlibraryurl'		=> 'http://mods.mybb.com/view/pluginlibrary'
 	);
@@ -236,7 +237,7 @@ function ougc_markpmasunread_private()
 	ougc_markpmasunread_loadlang();
 
 	$a_search = $r_search = array();
-	$query = $db->simple_select('privatemessages', 'pmid', "pmid IN (".implode(',', $matches).") AND status='1'");
+	$query = $db->simple_select('privatemessages', 'pmid', "pmid IN (".implode(',', $matches).") AND status!='0'");
 	while($pmid = $db->fetch_field($query, 'pmid'))
 	{
 		$pmid = (int)$pmid;
