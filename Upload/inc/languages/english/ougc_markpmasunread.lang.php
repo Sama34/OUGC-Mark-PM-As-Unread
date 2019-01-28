@@ -2,9 +2,9 @@
 
 /***************************************************************************
  *
- *   OUGC Mark PM As Unread plugin (/inc/languages/english/ougc_markpmasunread.php)
+ *   OUGC Mark PM As Unread plugin (/inc/languages/english/ougc_markpmasunread.lang.php)
  *	 Author: Omar Gonzalez
- *   Copyright: © 2012 Omar Gonzalez
+ *   Copyright: Â© 2012-2019 Omar Gonzalez
  *   
  *   Website: http://community.mybb.com/user-25096.html
  *

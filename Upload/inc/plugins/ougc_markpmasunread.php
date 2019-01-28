@@ -4,7 +4,7 @@
  *
  *   OUGC Mark PM As Unread plugin (/inc/plugins/ougc_markpmasunread.php)
  *	 Author: Omar Gonzalez
- *   Copyright: © 2012 Omar Gonzalez
+ *   Copyright: Â© 2012-2019 Omar Gonzalez
  *   
  *   Website: http://community.mybb.com/user-25096.html
  *
@@ -62,14 +62,14 @@ function ougc_markpmasunread_info()
 	return array(
 		'name'					=> 'OUGC Mark PM As Unread',
 		'description'			=> $lang->setting_group_ougc_markpmasunread,
-		'website'				=> 'http://omarg.me',
+		'website'				=> 'https://omarg.me/thread?public/plugins/ougc-mark-pm-as-unread',
 		'author'				=> 'Omar G.',
-		'authorsite'			=> 'http://omarg.me',
-		'version'				=> '1.8',
-		'versioncode'			=> 1800,
+		'authorsite'			=> 'https://omarg.me',
+		'version'				=> '1.8.19',
+		'versioncode'			=> 1819,
 		'compatibility'			=> '18*',
 		'codename'				=> 'ougc_markpmasunread',
-		'pluginlibraryversion'	=> 12,
+		'pluginlibraryversion'	=> 13,
 		'pluginlibraryurl'		=> 'http://mods.mybb.com/view/pluginlibrary'
 	);
 }
@@ -149,6 +149,8 @@ function ougc_markpmasunread_is_installed()
 function ougc_markpmasunread_uninstall()
 {
 	global $PL, $cache;
+
+	$PL or require_once PLUGINLIBRARY;
 
 	// Delete settings
 	$PL->settings_delete('ougc_markpmasunread');
