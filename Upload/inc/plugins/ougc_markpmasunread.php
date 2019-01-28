@@ -78,10 +78,12 @@ function ougc_markpmasunread_info()
 function ougc_markpmasunread_activate()
 {
 	global $db, $lang, $PL, $cache;
+
+	$PL or require_once PLUGINLIBRARY;
+
 	ougc_markpmasunread_plreq();
 	ougc_markpmasunread_deactivate();
 	ougc_markpmasunread_loadlang();
-	$PL or require_once PLUGINLIBRARY;
 
 	$PL->settings('ougc_markpmasunread', $lang->setting_group_ougc_markpmasunread, $lang->setting_group_ougc_markpmasunread_desc, array(
 		'groups'			=> array(
