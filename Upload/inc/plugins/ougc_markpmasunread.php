@@ -140,9 +140,16 @@ function ougc_markpmasunread_install()
 // _is_installed
 function ougc_markpmasunread_is_installed()
 {
-	global $settings;
+	global $cache;
 
-	return isset($settings['ougc_markpmasunread_groups']);
+	$plugins = $cache->read('ougc_plugins');
+
+	if(!$plugins)
+	{
+		$plugins = array();
+	}
+
+	return isset($plugins['markpmasunread']);
 }
 
 // _install
