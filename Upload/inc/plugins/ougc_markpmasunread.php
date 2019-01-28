@@ -4,7 +4,7 @@
  *
  *   OUGC Mark PM As Unread plugin (/inc/plugins/ougc_markpmasunread.php)
  *	 Author: Omar Gonzalez
- *   Copyright: © 2012 Omar Gonzalez
+ *   Copyright: Â© 2012-2019 Omar Gonzalez
  *   
  *   Website: http://community.mybb.com/user-25096.html
  *
@@ -62,13 +62,14 @@ function ougc_markpmasunread_info()
 	return array(
 		'name'					=> 'OUGC Mark PM As Unread',
 		'description'			=> $lang->setting_group_ougc_markpmasunread,
-		'website'				=> 'http://omarg.me',
+		'website'				=> 'https://omarg.me/thread?public/plugins/ougc-mark-pm-as-unread',
 		'author'				=> 'Omar G.',
-		'authorsite'			=> 'http://omarg.me',
-		'version'				=> '1.8',
-		'versioncode'			=> 1800,
+		'authorsite'			=> 'https://omarg.me',
+		'version'				=> '1.8.19',
+		'versioncode'			=> 1819,
 		'compatibility'			=> '18*',
-		'pluginlibraryversion'	=> 12,
+		'codename'				=> 'ougc_markpmasunread',
+		'pluginlibraryversion'	=> 13,
 		'pluginlibraryurl'		=> 'http://mods.mybb.com/view/pluginlibrary'
 	);
 }
@@ -77,10 +78,12 @@ function ougc_markpmasunread_info()
 function ougc_markpmasunread_activate()
 {
 	global $db, $lang, $PL, $cache;
+
+	$PL or require_once PLUGINLIBRARY;
+
 	ougc_markpmasunread_plreq();
 	ougc_markpmasunread_deactivate();
 	ougc_markpmasunread_loadlang();
-	$PL or require_once PLUGINLIBRARY;
 
 	$PL->settings('ougc_markpmasunread', $lang->setting_group_ougc_markpmasunread, $lang->setting_group_ougc_markpmasunread_desc, array(
 		'groups'			=> array(
@@ -137,15 +140,24 @@ function ougc_markpmasunread_install()
 // _is_installed
 function ougc_markpmasunread_is_installed()
 {
-	global $settings;
+	global $cache;
 
-	return isset($settings['ougc_markpmasunread_groups']);
+	$plugins = $cache->read('ougc_plugins');
+
+	if(!$plugins)
+	{
+		$plugins = array();
+	}
+
+	return isset($plugins['markpmasunread']);
 }
 
 // _install
 function ougc_markpmasunread_uninstall()
 {
-	global $PL;
+	global $PL, $cache;
+
+	$PL or require_once PLUGINLIBRARY;
 
 	// Delete settings
 	$PL->settings_delete('ougc_markpmasunread');
@@ -236,7 +248,7 @@ function ougc_markpmasunread_private()
 	ougc_markpmasunread_loadlang();
 
 	$a_search = $r_search = array();
-	$query = $db->simple_select('privatemessages', 'pmid', "pmid IN (".implode(',', $matches).") AND status='1'");
+	$query = $db->simple_select('privatemessages', 'pmid', "pmid IN (".implode(',', $matches).") AND status!='0'");
 	while($pmid = $db->fetch_field($query, 'pmid'))
 	{
 		$pmid = (int)$pmid;
