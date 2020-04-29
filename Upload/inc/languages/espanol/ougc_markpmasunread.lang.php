@@ -2,7 +2,7 @@
 
 /***************************************************************************
  *
- *   OUGC Mark PM As Unread plugin (/inc/languages/english/admin/ougc_markpmasunread.lang.php)
+ *   OUGC Mark PM As Unread plugin (/inc/languages/english/ougc_markpmasunread.lang.php)
  *	 Author: Omar Gonzalez
  *   Copyright: © 2012-2020 Omar Gonzalez
  *   
@@ -29,12 +29,10 @@
 
 // Plugin API
 $l['setting_group_ougc_markpmasunread'] = 'OUGC Mark PM As Unread';
-$l['setting_group_ougc_markpmasunread_desc'] = 'Allow users to mark private messages as unread.';
 
-// Settings
-$l['setting_ougc_markpmasunread_groups'] = 'Allowed Groups';
-$l['setting_ougc_markpmasunread_groups_desc'] = 'Select the allowed groups to use this feature.';
-
-// PluginLibrary
-$l['ougc_markpmasunread_plreq'] = 'This plugin requires <a href="{1}">PluginLibrary</a> version {2} or later to be uploaded to your forum.';
-$l['ougc_markpmasunread_plold'] = 'This plugin requires PluginLibrary version {2} or later, whereas your current version is {1}. Please do update <a href="{3}">PluginLibrary</a>.';
+// UCP
+$l['ougc_markpmasunread_var'] = 'Marcar Como No Leido';
+$l['ougc_markpmasunread_error_invalidpm'] = 'El mensaje no existe.';
+$l['ougc_markpmasunread_error_alreadyunread'] = 'El mensaje ya ha sido marcado como no leido.';
+$l['ougc_markpmasunread_error_unkown'] = 'Un error inesperado ha ocurrido.';
+$l['ougc_markpmasunread_error_userupdate'] = 'No fue posible actualizar tu numero de mensajes.';

@@ -4,9 +4,9 @@
  *
  *   OUGC Mark PM As Unread plugin (/inc/languages/english/ougc_markpmasunread.lang.php)
  *	 Author: Omar Gonzalez
- *   Copyright: © 2012-2019 Omar Gonzalez
+ *   Copyright: © 2012-2020 Omar Gonzalez
  *   
- *   Website: http://community.mybb.com/user-25096.html
+ *   Website: https://ougc.network/
  *
  *   Allow users to mark private messages as unread.
  *
@@ -32,7 +32,7 @@ $l['setting_group_ougc_markpmasunread'] = 'OUGC Mark PM As Unread';
 
 // UCP
 $l['ougc_markpmasunread_var'] = 'Mark Unread';
-$l['ougc_markpmasunread_error_invalidpm'] = 'The private message doesn\'t exists.';
-$l['ougc_markpmasunread_error_alreadyunread'] = 'The private message is already marked as unread.';
+$l['ougc_markpmasunread_error_invalidpm'] = 'The message doesn\'t exists.';
+$l['ougc_markpmasunread_error_alreadyunread'] = 'The message is already marked as unread.';
 $l['ougc_markpmasunread_error_unkown'] = 'A unkown error was found.';
-$l['ougc_markpmasunread_error_userupdate'] = 'It was not possible to update your PM Count.';
+$l['ougc_markpmasunread_error_userupdate'] = 'It was not possible to update your message Count.';

@@ -29,12 +29,12 @@
 
 // Plugin API
 $l['setting_group_ougc_markpmasunread'] = 'OUGC Mark PM As Unread';
-$l['setting_group_ougc_markpmasunread_desc'] = 'Allow users to mark private messages as unread.';
+$l['setting_group_ougc_markpmasunread_desc'] = 'Permite a los usuarios el marcar mensajes como no leidos.';
 
 // Settings
-$l['setting_ougc_markpmasunread_groups'] = 'Allowed Groups';
-$l['setting_ougc_markpmasunread_groups_desc'] = 'Select the allowed groups to use this feature.';
+$l['setting_ougc_markpmasunread_groups'] = 'Grupos Autorizados';
+$l['setting_ougc_markpmasunread_groups_desc'] = 'Selecciona los grupos autorizados para utilizar esta opcion.';
 
 // PluginLibrary
-$l['ougc_markpmasunread_plreq'] = 'This plugin requires <a href="{1}">PluginLibrary</a> version {2} or later to be uploaded to your forum.';
-$l['ougc_markpmasunread_plold'] = 'This plugin requires PluginLibrary version {2} or later, whereas your current version is {1}. Please do update <a href="{3}">PluginLibrary</a>.';
+$l['ougc_markpmasunread_plreq'] = 'Este plugin requiere <a href="{1}">PluginLibrary</a> version {2} para funcionar.';
+$l['ougc_markpmasunread_plold'] = $l['ougc_markpmasunread_plreq'];

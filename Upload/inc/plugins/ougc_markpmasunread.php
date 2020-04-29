@@ -4,9 +4,9 @@
  *
  *   OUGC Mark PM As Unread plugin (/inc/plugins/ougc_markpmasunread.php)
  *	 Author: Omar Gonzalez
- *   Copyright: © 2012-2019 Omar Gonzalez
+ *   Copyright: © 2012-2020 Omar Gonzalez
  *   
- *   Website: http://community.mybb.com/user-25096.html
+ *   Website: https://ougc.network/
  *
  *   Allow users to mark private messages as unread.
  *
@@ -62,15 +62,15 @@ function ougc_markpmasunread_info()
 	return array(
 		'name'					=> 'OUGC Mark PM As Unread',
 		'description'			=> $lang->setting_group_ougc_markpmasunread,
-		'website'				=> 'https://omarg.me/thread?public/plugins/ougc-mark-pm-as-unread',
+		'website'				=> 'https://ougc.network',
 		'author'				=> 'Omar G.',
-		'authorsite'			=> 'https://omarg.me',
-		'version'				=> '1.8.19',
-		'versioncode'			=> 1819,
+		'authorsite'			=> 'https://ougc.network',
+		'version'				=> '1.8.20',
+		'versioncode'			=> 1820,
 		'compatibility'			=> '18*',
 		'codename'				=> 'ougc_markpmasunread',
 		'pluginlibraryversion'	=> 13,
-		'pluginlibraryurl'		=> 'http://mods.mybb.com/view/pluginlibrary'
+		'pluginlibraryurl'		=> 'https://community.mybb.com/mods.php?action=view&pid=573'
 	);
 }
 
